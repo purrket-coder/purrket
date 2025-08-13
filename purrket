@@ -19,7 +19,7 @@
       --cta:#f59e0b;       /* laranja dos botões */
       --border:#2a3a4b;    /* linhas sutis */
     }
-    { box-sizing:border-box }
+    *{ box-sizing:border-box }
     html,body{ height:100% }
     body{
       margin:0; color:var(--txt); background:var(--bg);
@@ -27,7 +27,7 @@
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
 
-    / Fundo com estrelas + brilho radial /
+    /* Fundo com estrelas + brilho radial */
     .space-bg{
       position:fixed; inset:0; z-index:-1;
       background:
@@ -163,4 +163,3 @@
   </script>
 </body>
 </html>
-
