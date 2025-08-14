@@ -13,74 +13,164 @@
 
   <style>
     :root{
-      --bg:#0b1b2b;
-      --txt:#ffffff;
+      --bg:#071423;        /* espaço */
+      --txt:#fff;          /* texto */
+      --muted:#cfe1f3;     /* texto secundário */
+      --accent:#f59e0b;    /* laranja Purrket */
+      --glass: rgba(255,255,255,.08);
+      --border: rgba(255,255,255,.14);
     }
-    *{ box-sizing:border-box; margin:0; padding:0; }
-    html,body{ height:100%; width:100%; background:var(--bg); font-family:Poppins, sans-serif; }
-
-    /* Imagem de fundo ocupando tela inteira */
-    .fullscreen {
-      position: relative;
-      height: 100%;
-      width: 100%;
-      overflow: hidden;
-    }
-    .fullscreen img {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--txt);
+      font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
 
-    /* Texto central */
-    .overlay {
-      position: relative;
-      z-index: 2;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: var(--txt);
-      background: rgba(0, 0, 0, 0.3);
+    /* ===== Fundo e estrelas animadas ===== */
+    .bg{
+      position:fixed; inset:0; z-index:-3; overflow:hidden;
+      background: radial-gradient(ellipse at center, rgba(255,200,0,.08), transparent 60%);
     }
-    .overlay h1 {
-      font-size: 48px;
-      font-weight: 800;
+    .stars, .stars2, .stars3{
+      position:absolute; inset:-50% -50%; background-repeat:repeat;
+      background-image: radial-gradient(#fff 1px, transparent 1px);
+      opacity:.2; animation: drift 80s linear infinite;
     }
-    .overlay p {
-      font-size: 20px;
-      max-width: 600px;
-      margin-top: 10px;
+    .stars{ background-size:22px 22px; }
+    .stars2{ background-size:34px 34px; opacity:.15; animation-duration:120s }
+    .stars3{ background-size:56px 56px; opacity:.1;  animation-duration:180s }
+    @keyframes drift { to { transform: translate3d(25%,25%,0); } }
+
+    /* ===== Hero com imagem fullscreen ===== */
+    .hero{
+      position:relative; min-height:100vh; display:grid; place-items:center;
+      padding:24px; overflow:hidden;
     }
-    .btn {
-      margin-top: 20px;
-      padding: 12px 24px;
-      background: #f59e0b;
-      color: #111;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    .hero img.bg-cat{
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2;
+      filter: saturate(1.05) brightness(.9) contrast(1.02);
+      transform: scale(1.02);
     }
-    .btn:hover {
-      filter: brightness(1.1);
+    /* vinheta suave pra ler melhor o texto */
+    .vignette{
+      position:absolute; inset:0; z-index:-1;
+      background: radial-gradient(60% 60% at 50% 48%, rgba(0,0,0,.15) 0%, rgba(0,0,0,.55) 100%);
+    }
+
+    /* ===== Navbar mínima ===== */
+    .nav{
+      position:fixed; top:0; left:0; right:0; z-index:10;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 18px; gap:10px;
+      background: linear-gradient(to bottom, rgba(7,20,35,.6), rgba(7,20,35,.0));
+      backdrop-filter: blur(6px);
+    }
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800}
+    .dot{width:24px;height:24px;border-radius:9px;background:#facc15;box-shadow:0 0 30px rgba(250,204,21,.5)}
+    .nav a{color:#ffffffc9;text-decoration:none;font-weight:600;margin:0 8px}
+    .nav a:hover{color:#fff}
+
+    /* ===== Card de conteúdo (glass) ===== */
+    .card{
+      width:min(960px, 92vw);
+      border:1px solid var(--border);
+      background: linear-gradient( to bottom right, rgba(255,255,255,.08), rgba(255,255,255,.04) );
+      backdrop-filter: blur(8px);
+      border-radius:22px;
+      padding:28px 26px;
+      box-shadow: 0 20px 80px rgba(0,0,0,.5);
+      text-align:center;
+      animation: rise .7s ease both;
+    }
+    @keyframes rise { from{ opacity:0; transform: translateY(8px) } }
+
+    .kicker{font-size: clamp(32px, 4.5vw, 64px); font-weight:800; letter-spacing:.5px; text-shadow: 0 2px 10px rgba(0,0,0,.45)}
+    .headline{margin-top:6px; font-size: clamp(16px, 2vw, 20px); color:var(--muted)}
+    .cta{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px}
+
+    .btn{
+      position:relative; isolation:isolate;
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 22px; border-radius:14px; font-weight:800; text-decoration:none;
+      border:1px solid rgba(255,255,255,.25); color:#fff;
+      transition: transform .06s ease, filter .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .btn:active{ transform: translateY(1px) }
+    .btn-primary{
+      background: linear-gradient(180deg, #ffc857, #f59e0b);
+      color:#1a1200; border-color: rgba(0,0,0,.15);
+      box-shadow: 0 10px 28px rgba(245,158,11,.35);
+    }
+    .btn-primary::after{
+      content:""; position:absolute; inset:-2px; border-radius:16px; z-index:-1;
+      background: radial-gradient(60% 60% at 50% 40%, rgba(255,200,0,.45), transparent 60%);
+      opacity:.65; filter: blur(10px);
+      transition: opacity .2s ease;
+    }
+    .btn-primary:hover{ filter: brightness(1.06) }
+    .btn-primary:hover::after{ opacity:.9 }
+
+    .btn-ghost{ background: transparent; }
+    .btn-ghost:hover{ border-color:#fff }
+
+    /* footer simples */
+    footer{
+      position:relative; z-index:2; text-align:center; padding:18px 10px;
+      color:#ffffffb3; font-size:14px;
+    }
+
+    /* acessibilidade: foco visível */
+    a:focus-visible, button:focus-visible{
+      outline: 2px solid #fff; outline-offset: 3px; border-radius: 8px;
     }
   </style>
 </head>
 <body>
 
-  <div class="fullscreen">
-    <img src="https://raw.githubusercontent.com/purrket-coder/purrket/bb9cecc0fbb63933669fdd1fd57e0cd239b73ab7/3dca68f3-a51a-44c7-97e2-3cc274e3bde1.png" alt="Purrket — gato astronauta" />
-    <div class="overlay">
-      <h1>PURRKET</h1>
-      <p>To the Moon and Beyond!</p>
-      <a href="#buy" class="btn">BUY NOW</a>
+  <!-- navbar -->
+  <div class="nav" role="navigation" aria-label="Navegação principal">
+    <div class="brand"><div class="dot" aria-hidden="true"></div>Purrket</div>
+    <div class="links">
+      <a href="#how">Como comprar</a>
+      <a href="#chart">Gráfico</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#contact">Contato</a>
     </div>
   </div>
+
+  <!-- fundo / estrelas -->
+  <div class="bg" aria-hidden="true">
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+  </div>
+
+  <!-- hero -->
+  <section class="hero" id="home">
+    <img class="bg-cat" alt="Purrket — gato astronauta"
+         src="https://raw.githubusercontent.com/purrket-coder/purrket/bb9cecc0fbb63933669fdd1fd57e0cd239b73ab7/3dca68f3-a51a-44c7-97e2-3cc274e3bde1.png" />
+    <div class="vignette" aria-hidden="true"></div>
+
+    <div class="card" role="region" aria-label="Apresentação">
+      <div class="kicker">PURRKET</div>
+      <div class="headline">To the Moon and Beyond!</div>
+      <div class="cta">
+        <!-- Substitua os href pelos seus links reais -->
+        <a class="btn btn-primary" href="#buy">BUY NOW</a>
+        <a class="btn btn-ghost" href="#chart">CHART</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© <span id="y"></span> Purrket. All rights reserved.</footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
 
 </body>
 </html>
