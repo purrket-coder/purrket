@@ -1,1 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Purrket — To the Moon and Beyond!</title>
+  <meta name="description" content="Purrket: o hub meme-friendly para lançar e crescer sua memecoin.">
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b1b2b;
+      --txt:#ffffff;
+    }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html,body{ height:100%; width:100%; background:var(--bg); font-family:Poppins, sans-serif; }
+
+    /* Imagem de fundo ocupando tela inteira */
+    .fullscreen {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    .fullscreen img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Texto central */
+    .overlay {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: var(--txt);
+      background: rgba(0, 0, 0, 0.3);
+    }
+    .overlay h1 {
+      font-size: 48px;
+      font-weight: 800;
+    }
+    .overlay p {
+      font-size: 20px;
+      max-width: 600px;
+      margin-top: 10px;
+    }
+    .btn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #f59e0b;
+      color: #111;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .btn:hover {
+      filter: brightness(1.1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="fullscreen">
+    <img src="https://raw.githubusercontent.com/purrket-coder/purrket/bb9cecc0fbb63933669fdd1fd57e0cd239b73ab7/3dca68f3-a51a-44c7-97e2-3cc274e3bde1.png" alt="Purrket — gato astronauta" />
+    <div class="overlay">
+      <h1>PURRKET</h1>
+      <p>To the Moon and Beyond!</p>
+      <a href="#buy" class="btn">BUY NOW</a>
+    </div>
+  </div>
+
+</body>
+</html>
 
