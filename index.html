@@ -4,174 +4,169 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Purrket — To the Moon and Beyond!</title>
-  <meta name="description" content="Purrket: o hub meme-friendly para lançar e crescer sua memecoin.">
-
-  <!-- Fonte -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="description" content="Purrket: memecoin fofinha rumo à Lua. Galeria, roadmap e como comprar.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-
   <style>
-    :root{
-      --bg:#071423;        /* espaço */
-      --txt:#fff;          /* texto */
-      --muted:#cfe1f3;     /* texto secundário */
-      --accent:#f59e0b;    /* laranja Purrket */
-      --glass: rgba(255,255,255,.08);
-      --border: rgba(255,255,255,.14);
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; background:var(--bg); color:var(--txt);
-      font-family:Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-    }
+    :root{--bg:#071423;--txt:#fff;--muted:#cfe1f3;--accent:#f59e0b;--accent2:#facc15;--border:rgba(255,255,255,.14)}
+    *{box-sizing:border-box}html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--txt);font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial}
 
-    /* ===== Fundo e estrelas animadas ===== */
-    .bg{
-      position:fixed; inset:0; z-index:-3; overflow:hidden;
-      background: radial-gradient(ellipse at center, rgba(255,200,0,.08), transparent 60%);
-    }
-    .stars, .stars2, .stars3{
-      position:absolute; inset:-50% -50%; background-repeat:repeat;
-      background-image: radial-gradient(#fff 1px, transparent 1px);
-      opacity:.2; animation: drift 80s linear infinite;
-    }
-    .stars{ background-size:22px 22px; }
-    .stars2{ background-size:34px 34px; opacity:.15; animation-duration:120s }
-    .stars3{ background-size:56px 56px; opacity:.1;  animation-duration:180s }
-    @keyframes drift { to { transform: translate3d(25%,25%,0); } }
-
-    /* ===== Hero com imagem fullscreen ===== */
-    .hero{
-      position:relative; min-height:100vh; display:grid; place-items:center;
-      padding:24px; overflow:hidden;
-    }
-    .hero img.bg-cat{
-      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2;
-      filter: saturate(1.05) brightness(.9) contrast(1.02);
-      transform: scale(1.02);
-    }
-    /* vinheta suave pra ler melhor o texto */
-    .vignette{
-      position:absolute; inset:0; z-index:-1;
-      background: radial-gradient(60% 60% at 50% 48%, rgba(0,0,0,.15) 0%, rgba(0,0,0,.55) 100%);
-    }
-
-    /* ===== Navbar mínima ===== */
-    .nav{
-      position:fixed; top:0; left:0; right:0; z-index:10;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:12px 18px; gap:10px;
-      background: linear-gradient(to bottom, rgba(7,20,35,.6), rgba(7,20,35,.0));
-      backdrop-filter: blur(6px);
-    }
-    .brand{display:flex; align-items:center; gap:10px; font-weight:800}
-    .dot{width:24px;height:24px;border-radius:9px;background:#facc15;box-shadow:0 0 30px rgba(250,204,21,.5)}
-    .nav a{color:#ffffffc9;text-decoration:none;font-weight:600;margin:0 8px}
+    /* NAV */
+    .nav{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 18px;
+      background:linear-gradient(to bottom, rgba(7,20,35,.7), rgba(7,20,35,0));backdrop-filter:blur(6px)}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .dot{width:20px;height:20px;border-radius:8px;background:var(--accent2);box-shadow:0 0 24px rgba(250,204,21,.6)}
+    .nav a{color:#ffffffc9;text-decoration:none;font-weight:600;margin:0 10px}
     .nav a:hover{color:#fff}
 
-    /* ===== Card de conteúdo (glass) ===== */
-    .card{
-      width:min(960px, 92vw);
-      border:1px solid var(--border);
-      background: linear-gradient( to bottom right, rgba(255,255,255,.08), rgba(255,255,255,.04) );
-      backdrop-filter: blur(8px);
-      border-radius:22px;
-      padding:28px 26px;
-      box-shadow: 0 20px 80px rgba(0,0,0,.5);
-      text-align:center;
-      animation: rise .7s ease both;
-    }
-    @keyframes rise { from{ opacity:0; transform: translateY(8px) } }
+    /* BG stars */
+    .bg{position:fixed;inset:0;z-index:-3;overflow:hidden;background:radial-gradient(ellipse at center, rgba(255,200,0,.08), transparent 60%)}
+    .stars,.stars2,.stars3{position:absolute;inset:-50% -50%;background-repeat:repeat;background-image:radial-gradient(#fff 1px,transparent 1px);opacity:.2;animation:drift 80s linear infinite}
+    .stars{background-size:22px 22px}.stars2{background-size:34px 34px;opacity:.14;animation-duration:120s}.stars3{background-size:56px 56px;opacity:.1;animation-duration:180s}
+    @keyframes drift{to{transform:translate3d(25%,25%,0)}}
 
-    .kicker{font-size: clamp(32px, 4.5vw, 64px); font-weight:800; letter-spacing:.5px; text-shadow: 0 2px 10px rgba(0,0,0,.45)}
-    .headline{margin-top:6px; font-size: clamp(16px, 2vw, 20px); color:var(--muted)}
-    .cta{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+    section{padding:70px 0}
+    .stitle{font-size:clamp(24px,3vw,34px);margin:0 0 14px;font-weight:800;text-align:center}
+    .ssub{color:var(--muted);text-align:center;margin:0 0 28px}
 
-    .btn{
-      position:relative; isolation:isolate;
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:12px 22px; border-radius:14px; font-weight:800; text-decoration:none;
-      border:1px solid rgba(255,255,255,.25); color:#fff;
-      transition: transform .06s ease, filter .2s ease, box-shadow .2s ease, border-color .2s ease;
-    }
-    .btn:active{ transform: translateY(1px) }
-    .btn-primary{
-      background: linear-gradient(180deg, #ffc857, #f59e0b);
-      color:#1a1200; border-color: rgba(0,0,0,.15);
-      box-shadow: 0 10px 28px rgba(245,158,11,.35);
-    }
-    .btn-primary::after{
-      content:""; position:absolute; inset:-2px; border-radius:16px; z-index:-1;
-      background: radial-gradient(60% 60% at 50% 40%, rgba(255,200,0,.45), transparent 60%);
-      opacity:.65; filter: blur(10px);
-      transition: opacity .2s ease;
-    }
-    .btn-primary:hover{ filter: brightness(1.06) }
-    .btn-primary:hover::after{ opacity:.9 }
+    /* HERO (sem faixa) */
+    .hero{position:relative;min-height:100vh;display:grid;place-items:center;overflow:hidden}
+    .bg-cat{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;filter:saturate(1.03) brightness(.92)}
+    .shade{position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 45%, rgba(0,0,0,.05), rgba(0,0,0,.55));z-index:-1}
+    .hero-text{text-align:center;text-shadow:0 2px 10px rgba(0,0,0,.8);padding:24px}
+    .hero-text h1{font-size:clamp(42px,6vw,84px);margin:0 0 8px;font-weight:800}
+    .hero-text p{margin:0 0 20px;color:#eaf3ff}
+    .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;border-radius:14px;font-weight:800;border:1px solid rgba(255,255,255,.25);text-decoration:none}
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{background:linear-gradient(180deg,#ffc857,#f59e0b);color:#1a1200;border-color:rgba(0,0,0,.15);box-shadow:0 10px 28px rgba(245,158,11,.35)}
+    .btn-primary:hover{filter:brightness(1.06)} .btn-ghost{background:transparent}.btn-ghost:hover{border-color:#fff}
 
-    .btn-ghost{ background: transparent; }
-    .btn-ghost:hover{ border-color:#fff }
+    /* GALERIA */
+    .grid{display:grid;gap:14px}.card{position:relative;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.06)}
+    @media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card img{width:100%;display:block;aspect-ratio:1/1;object-fit:cover}
+    .card:hover{box-shadow:0 18px 60px rgba(0,0,0,.35);transform:translateY(-2px);transition:.2s}
 
-    /* footer simples */
-    footer{
-      position:relative; z-index:2; text-align:center; padding:18px 10px;
-      color:#ffffffb3; font-size:14px;
-    }
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;place-items:center;z-index:50;padding:18px}
+    .lightbox.open{display:grid}.lightbox img{max-width:95vw;max-height:90vh;border-radius:16px}
+    .close{position:absolute;top:14px;right:14px;background:#0008;border:1px solid #fff3;color:#fff;padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer}
 
-    /* acessibilidade: foco visível */
-    a:focus-visible, button:focus-visible{
-      outline: 2px solid #fff; outline-offset: 3px; border-radius: 8px;
-    }
+    /* ROADMAP / HOW */
+    .road{display:grid;gap:16px}@media(min-width:720px){.road{grid-template-columns:repeat(3,1fr)}}
+    .step{border:1px solid var(--border);background:linear-gradient( to bottom right, rgba(255,255,255,.08), rgba(255,255,255,.04) );backdrop-filter:blur(6px);border-radius:18px;padding:18px}
+    .step h4{margin:0 0 8px;font-size:18px}.step p{margin:0;color:#cfe1f3}
+    .steps{display:grid;gap:14px}@media(min-width:720px){.steps{grid-template-columns:repeat(3,1fr)}}
+    .how{border:1px solid var(--border);border-radius:16px;padding:16px;background:rgba(255,255,255,.05)}.how strong{display:block;margin-bottom:6px}
+
+    footer{border-top:1px solid var(--border);padding:22px 0;text-align:center;color:#ffffffb3;font-size:14px}
+    .socials{display:flex;justify-content:center;gap:12px;margin-top:8px}.pill{padding:8px 12px;border:1px solid #ffffff33;border-radius:999px}
   </style>
 </head>
 <body>
 
-  <!-- navbar -->
-  <div class="nav" role="navigation" aria-label="Navegação principal">
+  <!-- Nav -->
+  <div class="nav">
     <div class="brand"><div class="dot" aria-hidden="true"></div>Purrket</div>
-    <div class="links">
-      <a href="#how">Como comprar</a>
-      <a href="#chart">Gráfico</a>
+    <div>
+      <a href="#gallery">Galeria</a>
       <a href="#roadmap">Roadmap</a>
-      <a href="#contact">Contato</a>
+      <a href="#how">Como comprar</a>
+      <a href="#social">Contato</a>
     </div>
   </div>
 
-  <!-- fundo / estrelas -->
+  <!-- BG stars -->
   <div class="bg" aria-hidden="true">
-    <div class="stars"></div>
-    <div class="stars2"></div>
-    <div class="stars3"></div>
+    <div class="stars"></div><div class="stars2"></div><div class="stars3"></div>
   </div>
 
-  <!-- hero -->
+  <!-- HERO -->
   <section class="hero" id="home">
-    <img class="bg-cat" alt="Purrket — gato astronauta"
-         src="https://raw.githubusercontent.com/purrket-coder/purrket/bb9cecc0fbb63933669fdd1fd57e0cd239b73ab7/3dca68f3-a51a-44c7-97e2-3cc274e3bde1.png" />
-    <div class="vignette" aria-hidden="true"></div>
+    <!-- usa a imagem local que está no repositório -->
+    <img class="bg-cat" src="./3dca68f3-a51a-44c7-97e2-3cc274e3bde1.png" alt="Purrket — gato astronauta">
+    <div class="shade" aria-hidden="true"></div>
 
-    <div class="card" role="region" aria-label="Apresentação">
-      <div class="kicker">PURRKET</div>
-      <div class="headline">To the Moon and Beyond!</div>
+    <div class="hero-text">
+      <h1>PURRKET</h1>
+      <p>To the Moon and Beyond!</p>
       <div class="cta">
-        <!-- Substitua os href pelos seus links reais -->
-        <a class="btn btn-primary" href="#buy">BUY NOW</a>
-        <a class="btn btn-ghost" href="#chart">CHART</a>
+        <a class="btn btn-primary" href="#" target="_blank" rel="noopener">BUY NOW</a>
+        <a class="btn btn-ghost"   href="#" target="_blank" rel="noopener">CHART</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section id="gallery">
+    <div class="container">
+      <h2 class="stitle">Galeria de Memes & Artes</h2>
+      <p class="ssub">Momentos fofinhos do nosso gatonauta. 😺✨</p>
+      <div class="grid">
+        <!-- Troque pelos seus arquivos enviados ao repo -->
+        <a class="card" href="./3dca68f3-a51a-44c7-97e2-3cc274e3bde1.png"><img src="./3dca68f3-a51a-44c7-97e2-3cc274e3bde1.png" alt="Gato astronauta"></a>
+        <a class="card" href="./3dca68f3-a51a-44c7-97e2-3cc274e3bde1.png"><img src="./3dca68f3-a51a-44c7-97e2-3cc274e3bde1.png" alt="Gato astronauta 2"></a>
+        <a class="card" href="./3dca68f3-a51a-44c7-97e2-3cc274e3bde1.png"><img src="./3dca68f3-a51a-44c7-97e2-3cc274e3bde1.png" alt="Gato astronauta 3"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP fofinho -->
+  <section id="roadmap">
+    <div class="container">
+      <h2 class="stitle">Roadmap</h2>
+      <p class="ssub">Passinhos de gatinho rumo à Lua. 🐾🌕</p>
+      <div class="road">
+        <div class="step"><h4>Fase 1 — Miado Inicial</h4><p>Logo fofinha, site no ar e primeiros memes. “miau se você acredita!”</p></div>
+        <div class="step"><h4>Fase 2 — Patinhas na Órbita</h4><p>Campanhas no X/Telegram, parcerias e muita ronronagem.</p></div>
+        <div class="step"><h4>Fase 3 — Arranhando a Lua</h4><p>Listagens, gincanas e um miado universal: “to the moon!”</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO COMPRAR -->
+  <section id="how">
+    <div class="container">
+      <h2 class="stitle">Como comprar</h2>
+      <p class="ssub">Simples como um cochilo no sol. ☀️</p>
+      <div class="steps">
+        <div class="how"><strong>1) Instale a carteira</strong>MetaMask (ou outra) e guarde sua seed em segurança.</div>
+        <div class="how"><strong>2) Adicione saldo</strong>Envie a moeda base (SOL/ETH/BNB) para sua carteira.</div>
+        <div class="how"><strong>3) Compre PURRKET</strong>Abra a DEX, cole o contrato e confirme. (coloque o link real)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIALS -->
+  <section id="social">
+    <div class="container">
+      <h2 class="stitle">Junte-se à tripulação</h2>
+      <p class="ssub">Nosso gato não morde, só distribui miados de amor. 💛</p>
+      <div class="socials">
+        <a class="pill" href="#" target="_blank" rel="noopener">X / Twitter</a>
+        <a class="pill" href="#" target="_blank" rel="noopener">Telegram</a>
+        <a class="pill" href="#" target="_blank" rel="noopener">Discord</a>
       </div>
     </div>
   </section>
 
   <footer>© <span id="y"></span> Purrket. All rights reserved.</footer>
 
+  <!-- Lightbox -->
+  <div class="lightbox" id="lb"><button class="close" onclick="closeLb()">Fechar ✕</button><img alt=""></div>
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
+    const lb=document.getElementById('lb'), img=lb.querySelector('img');
+    document.querySelectorAll('.card').forEach(a=>{
+      a.addEventListener('click',e=>{e.preventDefault(); img.src=a.href; lb.classList.add('open');});
+    });
+    function closeLb(){ lb.classList.remove('open'); img.src=''; }
+    lb.addEventListener('click',e=>{ if(e.target===lb) closeLb(); });
+    addEventListener('keydown',e=>{ if(e.key==='Escape') closeLb(); });
   </script>
-</body>
-</html>
-
 </body>
 </html>
 
